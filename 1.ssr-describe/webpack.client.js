@@ -1,12 +1,9 @@
 const path = require('path')
-const nodeExternals = require('webpack-node-externals')
 
 // 客户端的webpack
 module.exports = {
-  target: "node",
   mode: "development",
   entry: "./client/index.js",
-  externals: [nodeExternals()], //用于规避一些代码,例如：node_modules
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, "public")
