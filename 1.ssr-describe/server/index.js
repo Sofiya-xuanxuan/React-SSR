@@ -7,10 +7,10 @@ import App from '../src/App'
 
 const app = express()
 
+app.use(express.static('public'))
 app.get('/', (req, res) => {
-  const Page = <App> </App>
   // 把react组件解析成html
-  const content = renderToString(Page)
+  const content = renderToString(App)
   // 字符串模板
   res.send(
     `
@@ -19,9 +19,10 @@ app.get('/', (req, res) => {
         <meta charset="utf-8"/>
         <title>react ssr</title>
         <body>
-        <div id='root>
-          ${content}
-        </div>
+          <div id='root>
+            ${content}
+          </div>
+          <script src='bundle.js></script>
         </body>
       </head>
     </html>
@@ -29,4 +30,4 @@ app.get('/', (req, res) => {
   )
 })
 
-app.listen(9099)
+app.listen(8099)
