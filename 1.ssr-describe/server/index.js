@@ -3,13 +3,21 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import express from 'express'
 import App from '../src/App'
+// 静态路由
+import { StaticRouter } from 'react-router-dom'
 
+import { Provider } from 'react-redux'
+import store from '../src/store/store'
 const app = express()
 // 静态资源目录
 app.use(express.static('public'))
-app.get('/', (req, res) => {
-  // 把react组件解析成html
-  const content = renderToString(App)
+app.get('*', (req, res) => {
+  // 把react组件(JSX)解析成html
+  const content = renderToString(
+    <Provider store={store}>
+      <StaticRouter location={req.url}>{App}</StaticRouter>
+    </Provider>
+  )
   // 字符串模板
   res.send(`
     <html>

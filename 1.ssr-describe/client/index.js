@@ -1,7 +1,16 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import App from '../src/App'
+import store from '../src/store/store'
+//注水客户端
 
-//注水
-ReactDom.hydrate(App, document.getElementById('root'))
+const Page = (
+  <Provider store={store}>
+    <BrowserRouter> {App} </BrowserRouter>
+  </Provider>
+)
+
+// hydrate
+ReactDom.render(Page, document.getElementById('root'))
